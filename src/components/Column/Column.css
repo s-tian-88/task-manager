@@ -1,0 +1,13 @@
+.column {
+    mix-width: 300px;
+    border-radius: 5px;
+    background-color: #DEE2E5;
+    position: relative;
+    width: 33%;
+}
+
+.add-another-card-btn {
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
+}

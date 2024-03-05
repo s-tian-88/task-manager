@@ -1,0 +1,12 @@
+.wall {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    position: relative;
+    width: 100%;
+    margin: 0;
+    padding: 10px;
+    background-color: #107ABB;
+}
+
+

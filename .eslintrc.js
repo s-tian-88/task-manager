@@ -25,5 +25,7 @@ module.exports = {
   rules: {
     'no-console': 'off',
     'import/no-extraneous-dependencies': 'off',
+    'no-unused-vars': 'off',
+    'import/prefer-default-export': 'off',
   },
 };
