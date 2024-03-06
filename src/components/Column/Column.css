@@ -1,13 +1,35 @@
 .column {
-    mix-width: 300px;
+    min-width: 300px;
     border-radius: 5px;
     background-color: #DEE2E5;
     position: relative;
     width: 33%;
 }
 
+.col-header {
+    padding: 10px;
+    font-wiight: bold;
+}
+
+.more {
+    border: none;
+    background-color: inherit;
+    float: right;
+    cursor: pointer;
+}
+
+.col-main {
+
+}
+
+.col-footer {
+    padding: 5px;
+}
+
 .add-another-card-btn {
     border: none;
     background-color: inherit;
     cursor: pointer;
+    color: #798C97;
 }
+

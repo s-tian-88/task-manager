@@ -12,6 +12,7 @@ export default class Column {
     }
 
     this.addAnotherCardBtnElOnClick = this.addAnotherCardBtnElOnClick.bind(this);
+    this.moreBtnOnClick = this.moreBtnOnClick.bind(this);
 
     this.title = title.toUpperCase();
     this.container = container;
@@ -39,7 +40,10 @@ export default class Column {
     addAnotherCardBtnEl.textContent = '+ Add another card';
     addAnotherCardBtnEl.addEventListener('click', this.addAnotherCardBtnElOnClick);
 
+    const moreBtnEl = this.createHeaderButtonElement();
+
     colFooterEl.appendChild(addAnotherCardBtnEl);
+    colHeaderEl.appendChild(moreBtnEl);
 
     colEl.appendChild(colHeaderEl);
     colEl.appendChild(colMainEl);
@@ -48,8 +52,22 @@ export default class Column {
     this.container.appendChild(colEl);
   }
 
+  createHeaderButtonElement() {
+    const btnEl = document.createElement('button');
+    btnEl.classList.add('more');
+    btnEl.textContent = '...';
+
+    btnEl.addEventListener('click', this.moreBtnOnClick);
+    return btnEl;
+  }
+
   addAnotherCardBtnElOnClick(e) {
     e.preventDefault();
     console.log(`"Add another card button" on click (${this.title} column)`);
+  }
+
+  moreBtnOnClick(e) {
+    e.preventDefault();
+    console.log(`"more button" on click (${this.title} column)`);
   }
 }

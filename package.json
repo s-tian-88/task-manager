@@ -3,8 +3,7 @@
   "packageManager": "yarn@4.1.1",
   "scripts": {
     "lint": "eslint --fix .",
-    "test": "jest",
-    "coverage": "jest --coverage",
+    "test": "jest --coverage",
     "build": "webpack --config webpack.dev.config",
     "start": "webpack serve --config webpack.prod.config"
   },
