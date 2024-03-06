@@ -15,16 +15,18 @@ export default class Card {
     this.deleteBtnOnClick = this.deleteBtnOnClick.bind(this);
 
     this.container = container;
-
-    this.container.appendChild(this.createCardElement());
   }
 
-  createCardElement() {
+  addCard(title = 'Title', description = 'Description...') {
+    this.container.appendChild(this.createCardElement(title, description));
+  }
+
+  createCardElement(title, description) {
     const cardElement = document.createElement('div');
     cardElement.classList.add('card');
 
-    cardElement.appendChild(this.createCardHeaderElement());
-    cardElement.appendChild(this.createCardContentElement());
+    cardElement.appendChild(this.createCardHeaderElement(title));
+    cardElement.appendChild(this.createCardContentElement(description));
     cardElement.appendChild(this.createCardFooterElement());
 
     cardElement.addEventListener('mouseenter', this.cardElementMouseEnter);
@@ -33,7 +35,7 @@ export default class Card {
     return cardElement;
   }
 
-  createCardHeaderElement(title = 'Test title') {
+  createCardHeaderElement(title) {
     const cardHeaderElement = document.createElement('div');
 
     cardHeaderElement.classList.add('card-header');
@@ -44,7 +46,7 @@ export default class Card {
     return cardHeaderElement;
   }
 
-  createCardContentElement(content = 'Card test content') {
+  createCardContentElement(content) {
     const cardContentElement = document.createElement('div');
 
     cardContentElement.classList.add('card-content');

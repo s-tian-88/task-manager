@@ -1,3 +1,4 @@
+import CardWidget from '../CardWidget/CardWidget';
 import { validateColumnTitle } from '../../js/utils';
 import './Column.css';
 
@@ -62,8 +63,16 @@ export default class Column {
   }
 
   addAnotherCardBtnElOnClick(e) {
+    const oldWidget = document.querySelector('.widget');
+    if (oldWidget) {
+      oldWidget.closest('.column').querySelector('.add-another-card-btn').classList.remove('inactive');
+      oldWidget.remove();
+    }
+
     e.preventDefault();
-    console.log(`"Add another card button" on click (${this.title} column)`);
+    const column = e.target.closest('.column');
+    const widget = new CardWidget();
+    widget.addWidget(column);
   }
 
   moreBtnOnClick(e) {
