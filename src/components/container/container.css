@@ -1,14 +1,15 @@
 .container {
     font-family: "Gill Sans", sans-serif;
-    background-color: #107ABB;
 }
 
 .header {
-    color: #7F909A;
+    color: #213E4F;
     font-size: 4rem;
     text-align: center;
 }
 
 .main {
-
+    margin:10px;
+    display: flex;
+    justify-content: space-between;
 }
