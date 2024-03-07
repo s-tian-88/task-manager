@@ -3,18 +3,14 @@ import './column.css';
 import { validateColumnTitle, convertTitleToSelector } from '../../js/utils';
 
 export default class Column {
-
-  constructor (container, title) {
-
+  constructor(container, title) {
     if (!(container instanceof HTMLElement)) {
       throw new Error('Container is not HTMLElement');
     }
     this.container = container;
-
   }
 
-  addColumn (title) {
-
+  addColumn(title) {
     if (!(validateColumnTitle(title))) {
       throw new Error('Input title is incorrect');
     }

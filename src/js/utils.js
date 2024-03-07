@@ -4,8 +4,7 @@ export function validateColumnTitle(string) {
   return Boolean(string.match(regex));
 }
 
-export function convertTitleToSelector (title) {
+export function convertTitleToSelector(title) {
   const selector = title.toLowerCase().replaceAll(' ', '-');
   return selector;
 }
-

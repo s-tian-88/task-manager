@@ -2,7 +2,7 @@ import './container.css';
 import { html } from './containerHTML';
 
 export default class Container {
-  constructor (body) {
+  constructor(body) {
     if (!(body instanceof HTMLElement)) {
       throw new Error('Body is not HTMLElement');
     }
@@ -12,7 +12,7 @@ export default class Container {
     this.innerHTML();
   }
 
-  innerHTML () {
+  innerHTML() {
     this.body.innerHTML = html;
   }
 }

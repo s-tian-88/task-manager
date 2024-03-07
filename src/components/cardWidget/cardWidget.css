@@ -1,0 +1,48 @@
+.card-widget {
+    width: 100%;
+    background-color: #107ABB;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+.card-widget-title {
+    border: none;
+    font-size: 1.2rem;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 20px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+
+}
+
+.card-widget-description {
+    border: none;
+    box-sizing: border-box;
+    resize: none;
+    width: 100%;
+    height: 100px;
+    padding: 12px 20px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.card-widget-title:focus, .card-widget-description:focus {
+    outline: none;
+    border-right: 0.1rem solid #107ABB;
+    box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.5);
+}
+
+.card-widget-buttons {
+    margin-top: 10px;
+}
+
+.btn {
+    margin-right: 2rem;
+    font-size: 1rem;
+    color: #213E4F;
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
+}

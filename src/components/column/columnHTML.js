@@ -1,6 +1,5 @@
-export function html (title) {
-  const html = 
-  `
+export function html(title) {
+  const html = `
       <header class="column-header">
           <div class="column-header-title">${title.toUpperCase()}</div>
           <button class="column-header-btn">...</button>
@@ -11,7 +10,6 @@ export function html (title) {
               <span class="column-add-card-btn">Add new card</span>
           </button>
       </footer>
-  `
+  `;
   return html;
-
 }
