@@ -1,0 +1,43 @@
+.card {
+    position: relative;
+    margin-top: 10px;
+    background-color: #FFFFFF;
+    box-sizing: border-box;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: default;
+}
+
+.card-title {
+    font-weight: bold;
+}
+
+.card-description-content {
+
+}
+
+.card-buttons {
+    /* margin: 10px 0 0; */
+}
+
+.details, .like, .comment, .delete {
+    border: none;
+    background-color: inherit;
+    padding-left: 0;
+    cursor: pointer;
+}
+
+.delete {
+    position: absolute;
+    top: 5px; right: 5px;
+}
+
+.opacity {
+    opacity: 0.1;
+}
+
+.dragged {
+    font-family: "Gill Sans", sans-serif;;
+    position: absolute;
+    z-index: 999;
+}

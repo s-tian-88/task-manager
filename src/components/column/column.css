@@ -3,6 +3,7 @@
     width: 32%;
     background-color: #DEE2E5;
     padding: 10px;
+    align-self: flex-start;
 }
 
 .column-header {

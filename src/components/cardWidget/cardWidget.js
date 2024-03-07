@@ -1,11 +1,8 @@
 import { getCardWidgetHTML } from './cardWidgetHTML';
 import './cardWidget.css';
 
-
 export default class CardWidget {
-
   constructor() {
-
     this.currentCardWidget;
     this.currentColumn;
 
@@ -14,18 +11,18 @@ export default class CardWidget {
 
     this.buttons = document.body.querySelectorAll('.column-add-card-btn');
     for (const btn of this.buttons) {
-      btn.addEventListener('click', this.columnAddCardBtnOnClick)
+      btn.addEventListener('click', this.columnAddCardBtnOnClick);
     }
   }
 
-  renderCardWidgetElement (column) {
-    const widget = this.buildCardWidgetElement()
+  renderCardWidgetElement(column) {
+    const widget = this.buildCardWidgetElement();
     column.appendChild(widget);
 
     return widget;
   }
 
-  buildCardWidgetElement () {
+  buildCardWidgetElement() {
     const cardWidgetElement = document.createElement('form');
     cardWidgetElement.classList.add('card-widget');
     cardWidgetElement.innerHTML = getCardWidgetHTML();
@@ -37,31 +34,31 @@ export default class CardWidget {
     return cardWidgetElement;
   }
 
-  columnAddCardBtnOnClick (e) {
+  columnAddCardBtnOnClick(e) {
     e.preventDefault();
 
     if (this.currentWidget) {
       this.currentWidget.remove();
       this.currentColumn.querySelector('.column-add-card-btn').classList.remove('hide');
-      this.current
+      this.current;
     }
 
     e.target.classList.add('hide');
     this.currentColumn = e.target.closest('.column');
     this.currentWidget = this.renderCardWidgetElement(this.currentColumn);
-    console.log(this.currentWidget)
   }
 
-  submit (e) {
+  submit(e) {
     e.preventDefault();
   }
 
-  widgetBreakOnClick (e) {
+  widgetBreakOnClick(e) {
+    e.preventDefault();
     this.currentWidget.remove();
     this.currentColumn.querySelector('.column-add-card-btn').classList.remove('hide');
   }
 
   widgetCleanOnClick = (e) => {
     this.currentWidget.reset();
-  }
+  };
 }
