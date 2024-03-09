@@ -1,4 +1,4 @@
-export function html(title) {
+export function getColumnHtml(title) {
   const html = `
       <header class="column-header">
           <div class="column-header-title">${title.toUpperCase()}</div>

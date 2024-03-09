@@ -1,4 +1,4 @@
-import { html } from './columnHTML';
+import { getColumnHtml } from './columnHTML';
 import './column.css';
 import { validateColumnTitle, convertTitleToSelector } from '../../js/utils';
 
@@ -21,7 +21,7 @@ export default class Column {
     const columnElement = document.createElement('div');
     columnElement.classList.add('column', this.columnSelector);
 
-    columnElement.innerHTML = html(this.title);
+    columnElement.innerHTML = getColumnHtml(this.title);
     this.container.appendChild(columnElement);
   }
 }

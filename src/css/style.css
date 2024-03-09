@@ -2,6 +2,7 @@ body {
     position: relative;
     background-color: #107ABB;
     margin: 0;
+    overflow-x: hidden;
 }
 
 .hide {

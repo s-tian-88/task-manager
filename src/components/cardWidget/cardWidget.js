@@ -3,16 +3,14 @@ import './cardWidget.css';
 
 export default class CardWidget {
   constructor() {
-    this.currentCardWidget;
-    this.currentColumn;
+    this.currentCardWidget = undefined;
+    this.currentColumn = undefined;
 
     this.widgetBreakOnClick = this.widgetBreakOnClick.bind(this);
     this.columnAddCardBtnOnClick = this.columnAddCardBtnOnClick.bind(this);
 
     this.buttons = document.body.querySelectorAll('.column-add-card-btn');
-    for (const btn of this.buttons) {
-      btn.addEventListener('click', this.columnAddCardBtnOnClick);
-    }
+    this.buttons.forEach((btn) => btn.addEventListener('click', this.columnAddCardBtnOnClick));
   }
 
   renderCardWidgetElement(column) {
@@ -40,7 +38,6 @@ export default class CardWidget {
     if (this.currentWidget) {
       this.currentWidget.remove();
       this.currentColumn.querySelector('.column-add-card-btn').classList.remove('hide');
-      this.current;
     }
 
     e.target.classList.add('hide');

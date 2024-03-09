@@ -3,12 +3,11 @@ import Column from '../components/column/column';
 import CardWidget from '../components/cardWidget/cardWidget';
 import Card from '../components/card/card';
 
-new Container(document.body);
+const container = new Container(document.body);
 const column = new Column(document.querySelector('main'));
 
-for (const title of ['todo', 'in progress', 'done']) {
-  column.addColumn(title);
-}
+const columns = ['todo', 'in progress', 'done'];
+columns.forEach((el) => column.addColumn(el));
 
-new CardWidget();
-new Card();
+const cardWidget = new CardWidget();
+const card = new Card();

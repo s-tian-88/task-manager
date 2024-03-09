@@ -20,23 +20,21 @@
     /* margin: 10px 0 0; */
 }
 
-.details, .like, .comment, .delete {
+.delete {
     border: none;
     background-color: inherit;
     padding-left: 0;
     cursor: pointer;
-}
-
-.delete {
     position: absolute;
     top: 5px; right: 5px;
 }
 
-.opacity {
-    opacity: 0.1;
+.actual-element {
+    opacity: 0;
 }
 
-.dragged {
+.dragged-element {
+    pointer-events: none;
     font-family: "Gill Sans", sans-serif;;
     position: absolute;
     z-index: 999;

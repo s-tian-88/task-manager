@@ -1,3 +1,6 @@
+coverage
+build
+
 .yarn/*
 !.yarn/patches
 !.yarn/plugins
