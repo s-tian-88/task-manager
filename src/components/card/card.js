@@ -14,7 +14,8 @@ export default class Card {
     this.renderAlreadyCards = this.renderAlreadyCards.bind(this);
 
     document.body.addEventListener('mousedown', this.onMouseDown);
-    document.addEventListener('DOMContentLoaded', this.renderAlreadyCards)
+    document.addEventListener('DOMContentLoaded', this.renderAlreadyCards);
+    document.body.addEventListener('mouseup', this.onMouseUp);
   }
 
   buildCardElement(id, title, description) {
@@ -31,24 +32,22 @@ export default class Card {
     return cardElement;
   }
 
-  renderAlreadyCards () {
+  renderAlreadyCards() {
     if (localStorage.length === 0) {
       return;
     }
 
-    console.log(localStorage);
-    for (let key in localStorage) {
-      let obj = JSON.parse(localStorage.getItem(key))
-      if (obj && obj.hasOwnProperty('id')) {
-        this.renderCardElement(obj);
-      }
-    }
-
+    Object.keys(localStorage).forEach((key) => {
+      this.renderCardElement(JSON.parse(localStorage.getItem(key)));
+    });
   }
 
   renderCardElement(cardObject) {
-    const cardElement = this.buildCardElement(cardObject.id, cardObject.title, cardObject.description);
-    document.querySelector(`.${cardObject.column}`).querySelector('.column-main').appendChild(cardElement);
+    const cardElement = this.buildCardElement(
+      cardObject.id, cardObject.title, cardObject.description
+    );
+    document.querySelector(`.${cardObject.column}`).querySelector(
+      '.column-main').appendChild(cardElement);
   }
 
   cardWidgetAddOnClick(e) {
@@ -68,7 +67,7 @@ export default class Card {
 
     currentColumn.querySelector('.column-add-card-btn').classList.remove('hide');
 
-    localStorage.setItem(cardObject.id, JSON.stringify(cardObject))
+    localStorage.setItem(cardObject.id, JSON.stringify(cardObject));
     this.renderCardElement(cardObject);
   }
 
@@ -106,7 +105,6 @@ export default class Card {
     this.draggedElement.style.top = `${this.actualElementCoords.y - 8}px`;
 
     document.body.addEventListener('mousemove', this.onMouseMove);
-    document.body.addEventListener('mouseup', this.onMouseUp);
   }
 
   onMouseDown(e) {
@@ -117,15 +115,14 @@ export default class Card {
   }
 
   onMouseUp(e) {
-    e.preventDefault();
-
     if (this.draggedElement) {
+      e.preventDefault();
       this.actualElement.classList.remove('actual-element');
       this.draggedElement.remove();
 
       const storageItem = JSON.parse(localStorage.getItem(this.actualElement.getAttribute('id')));
       storageItem.column = this.actualElement.closest('.column').getAttribute('name');
-      localStorage.setItem(storageItem.id, JSON.stringify(storageItem))
+      localStorage.setItem(storageItem.id, JSON.stringify(storageItem));
 
       document.body.removeEventListener('mousemove', this.onMouseMove);
     }
@@ -142,16 +139,19 @@ export default class Card {
     if (select && select !== this.actualElement) {
       const { y } = select.getBoundingClientRect();
 
-      if (e.clientY > (y + select.offsetHeight / 2) && select.nextElementSibling !== this.actualElement) {
+      if (e.clientY > (y + select.offsetHeight / 2) &&
+        select.nextElementSibling !== this.actualElement) {
         select.after(this.actualElement);
       }
 
-      if (e.clientY < (y + select.offsetHeight / 2) && select.previousElementSibling !== this.actualElement) {
+      if (e.clientY < (y + select.offsetHeight / 2) &&
+        select.previousElementSibling !== this.actualElement) {
         select.parentElement.insertBefore(this.actualElement, select);
       }
     }
 
-    if (e.target.classList.contains('column-add-card-btn') || e.target.classList.contains('column-footer')) {
+    if (e.target.classList.contains('column-add-card-btn') ||
+      e.target.classList.contains('column-footer')) {
       const column = e.target.closest('.column');
       column.querySelector('.column-main').appendChild(this.actualElement);
     }
@@ -165,5 +165,4 @@ export default class Card {
 
     currentCard.remove();
   }
-
 }

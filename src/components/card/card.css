@@ -5,7 +5,6 @@
     box-sizing: border-box;
     padding: 10px;
     border-radius: 5px;
-    cursor: default;
 }
 
 .card-title {
@@ -17,7 +16,6 @@
 }
 
 .card-buttons {
-    /* margin: 10px 0 0; */
 }
 
 .delete {
@@ -38,4 +36,5 @@
     font-family: "Gill Sans", sans-serif;;
     position: absolute;
     z-index: 999;
+    cursor: 
 }
