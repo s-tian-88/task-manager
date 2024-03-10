@@ -11,12 +11,3 @@ columns.forEach((el) => column.addColumn(el));
 
 const cardWidget = new CardWidget();
 const card = new Card();
-card.renderCardElement(document.querySelector('.column-main'));
-card.renderCardElement(document.querySelector('.column-main'));
-card.renderCardElement(document.querySelector('.column-main'));
-card.renderCardElement(document.querySelector('.column-main'));
-card.renderCardElement(document.querySelector('.column-main'));
-card.renderCardElement(document.querySelector('.column-main'));
-card.renderCardElement(document.querySelector('.column-main'));
-card.renderCardElement(document.querySelector('.column-main'));
-card.renderCardElement(document.querySelector('.column-main'));

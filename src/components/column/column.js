@@ -20,6 +20,7 @@ export default class Column {
 
     const columnElement = document.createElement('div');
     columnElement.classList.add('column', this.columnSelector);
+    columnElement.setAttribute('name', this.columnSelector);
 
     columnElement.innerHTML = getColumnHtml(this.title);
     this.container.appendChild(columnElement);

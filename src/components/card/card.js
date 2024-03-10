@@ -10,12 +10,16 @@ export default class Card {
     this.onMouseUp = this.onMouseUp.bind(this);
     this.cardOnMouseDown = this.cardOnMouseDown.bind(this);
     this.onMouseMove = this.onMouseMove.bind(this);
+    this.deleteOnClick = this.deleteOnClick.bind(this);
+    this.renderAlreadyCards = this.renderAlreadyCards.bind(this);
 
     document.body.addEventListener('mousedown', this.onMouseDown);
+    document.addEventListener('DOMContentLoaded', this.renderAlreadyCards)
   }
 
-  buildCardElement(title = 'Default title', description = 'Default description') {
+  buildCardElement(id, title, description) {
     const cardElement = document.createElement('div');
+    cardElement.setAttribute('id', id);
     cardElement.classList.add('card');
     cardElement.innerHTML = getCardHtml(title, description);
 
@@ -27,21 +31,49 @@ export default class Card {
     return cardElement;
   }
 
-  renderCardElement(container) {
-    const cardElement = this.buildCardElement();
-    container.appendChild(cardElement);
+  renderAlreadyCards () {
+    if (localStorage.length === 0) {
+      return;
+    }
+
+    console.log(localStorage);
+    for (let key in localStorage) {
+      let obj = JSON.parse(localStorage.getItem(key))
+      if (obj && obj.hasOwnProperty('id')) {
+        this.renderCardElement(obj);
+      }
+    }
+
+  }
+
+  renderCardElement(cardObject) {
+    const cardElement = this.buildCardElement(cardObject.id, cardObject.title, cardObject.description);
+    document.querySelector(`.${cardObject.column}`).querySelector('.column-main').appendChild(cardElement);
   }
 
   cardWidgetAddOnClick(e) {
     e.preventDefault();
+
+    const widget = e.target.closest('.card-widget');
+
+    const cardObject = {
+      id: Date.now(),
+      column: widget.closest('.column').getAttribute('name'),
+      title: widget.querySelector('.card-widget-title').value,
+      description: widget.querySelector('.card-widget-description').value,
+    };
+
     const currentColumn = e.target.closest('.column');
     const currentWidget = currentColumn.querySelector('.card-widget').remove();
+
     currentColumn.querySelector('.column-add-card-btn').classList.remove('hide');
-    this.renderCardElement(currentColumn.querySelector('.column-main'));
+
+    localStorage.setItem(cardObject.id, JSON.stringify(cardObject))
+    this.renderCardElement(cardObject);
   }
 
   cardElementMouseEnter(e) {
-    e.target.querySelector('.delete').classList.remove('hide')
+    e.target.querySelector('.delete').classList.remove('hide');
   }
 
   cardElementMouseLeave(e) {
@@ -78,9 +110,8 @@ export default class Card {
   }
 
   onMouseDown(e) {
-    e.preventDefault();
-
     if (e.target.classList.contains('card-widget-add')) {
+      e.preventDefault();
       this.cardWidgetAddOnClick(e);
     }
   }
@@ -92,20 +123,21 @@ export default class Card {
       this.actualElement.classList.remove('actual-element');
       this.draggedElement.remove();
 
+      const storageItem = JSON.parse(localStorage.getItem(this.actualElement.getAttribute('id')));
+      storageItem.column = this.actualElement.closest('.column').getAttribute('name');
+      localStorage.setItem(storageItem.id, JSON.stringify(storageItem))
+
       document.body.removeEventListener('mousemove', this.onMouseMove);
     }
-
   }
 
   onMouseMove(e) {
     e.preventDefault();
 
-    let select;
-
     this.draggedElement.style.left = `${e.clientX - this.x}px`;
     this.draggedElement.style.top = `${e.clientY - this.y - 10}px`;
 
-    select = e.target.closest('.card');
+    const select = e.target.closest('.card');
 
     if (select && select !== this.actualElement) {
       const { y } = select.getBoundingClientRect();
@@ -119,16 +151,19 @@ export default class Card {
       }
     }
 
-
     if (e.target.classList.contains('column-add-card-btn') || e.target.classList.contains('column-footer')) {
       const column = e.target.closest('.column');
       column.querySelector('.column-main').appendChild(this.actualElement);
     }
-
   }
 
   deleteOnClick(e) {
     const currentCard = e.target.closest('.card');
+    const cardId = currentCard.getAttribute('id');
+
+    localStorage.removeItem(currentCard.getAttribute('id'));
+
     currentCard.remove();
   }
+
 }

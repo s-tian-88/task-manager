@@ -23,7 +23,7 @@ module.exports = {
     ecmaVersion: 'latest',
   },
   rules: {
-    'no-console': 'off',
+    // 'no-console': 'off',
     'import/no-extraneous-dependencies': 'off',
     'no-unused-vars': 'off',
     'import/prefer-default-export': 'off',
