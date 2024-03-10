@@ -44,10 +44,13 @@ export default class Card {
 
   renderCardElement(cardObject) {
     const cardElement = this.buildCardElement(
-      cardObject.id, cardObject.title, cardObject.description
+      cardObject.id,
+      cardObject.title,
+      cardObject.description,
     );
     document.querySelector(`.${cardObject.column}`).querySelector(
-      '.column-main').appendChild(cardElement);
+      '.column-main',
+    ).appendChild(cardElement);
   }
 
   cardWidgetAddOnClick(e) {
@@ -139,19 +142,19 @@ export default class Card {
     if (select && select !== this.actualElement) {
       const { y } = select.getBoundingClientRect();
 
-      if (e.clientY > (y + select.offsetHeight / 2) &&
-        select.nextElementSibling !== this.actualElement) {
+      if (e.clientY > (y + select.offsetHeight / 2)
+        && select.nextElementSibling !== this.actualElement) {
         select.after(this.actualElement);
       }
 
-      if (e.clientY < (y + select.offsetHeight / 2) &&
-        select.previousElementSibling !== this.actualElement) {
+      if (e.clientY < (y + select.offsetHeight / 2)
+        && select.previousElementSibling !== this.actualElement) {
         select.parentElement.insertBefore(this.actualElement, select);
       }
     }
 
-    if (e.target.classList.contains('column-add-card-btn') ||
-      e.target.classList.contains('column-footer')) {
+    if (e.target.classList.contains('column-add-card-btn')
+      || e.target.classList.contains('column-footer')) {
       const column = e.target.closest('.column');
       column.querySelector('.column-main').appendChild(this.actualElement);
     }
