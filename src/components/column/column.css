@@ -9,6 +9,7 @@
 .column-header {
     display: flex;
     justify-content: space-between;
+    cursor: default;
 }
 
 .column-header-title {

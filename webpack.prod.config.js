@@ -11,4 +11,8 @@ module.exports = merge(common, {
       new TerserWebpackPlugin(),
     ],
   },
+
+  devServer: {
+    port: 9000,
+  },
 });

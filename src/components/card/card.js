@@ -5,7 +5,6 @@ export default class Card {
   constructor() {
     this.actualElement;
     this.draggedElement;
-    this.droppedElement;
 
     this.onMouseDown = this.onMouseDown.bind(this);
     this.onMouseUp = this.onMouseUp.bind(this);
@@ -42,7 +41,7 @@ export default class Card {
   }
 
   cardElementMouseEnter(e) {
-    e.target.querySelector('.delete').classList.remove('hide');
+    e.target.querySelector('.delete').classList.remove('hide')
   }
 
   cardElementMouseLeave(e) {
@@ -64,8 +63,6 @@ export default class Card {
 
     this.draggedElement.style.width = `${this.actualElement.offsetWidth}px`;
     this.actualElement.classList.add('actual-element');
-
-    this.droppedElement = this.actualElement.cloneNode(true);
 
     this.actualElementCoords = this.actualElement.getBoundingClientRect();
     document.body.appendChild(this.draggedElement);
@@ -90,28 +87,44 @@ export default class Card {
 
   onMouseUp(e) {
     e.preventDefault();
+
+    if (this.draggedElement) {
+      this.actualElement.classList.remove('actual-element');
+      this.draggedElement.remove();
+
+      document.body.removeEventListener('mousemove', this.onMouseMove);
+    }
+
   }
 
   onMouseMove(e) {
     e.preventDefault();
 
+    let select;
+
     this.draggedElement.style.left = `${e.clientX - this.x}px`;
     this.draggedElement.style.top = `${e.clientY - this.y - 10}px`;
 
-    const select = e.target.closest('.card');
+    select = e.target.closest('.card');
 
     if (select && select !== this.actualElement) {
       const { y } = select.getBoundingClientRect();
-      console.log(e.clientY, y, select.offsetHeight / 2);
-      if (e.clientY < (y + select.offsetHeight / 2)
-        && select.PreviousSibling !== this.actualElement) {
-        console.log('before');
-        select.parentElement.insertBefore(this.droppedElement, select);
+
+      if (e.clientY > (y + select.offsetHeight / 2) && select.nextElementSibling !== this.actualElement) {
+        select.after(this.actualElement);
       }
-      if (select.nextSiblingElement !== this.actualElement) {
-        select.after(this.droppedElement);
+
+      if (e.clientY < (y + select.offsetHeight / 2) && select.previousElementSibling !== this.actualElement) {
+        select.parentElement.insertBefore(this.actualElement, select);
       }
     }
+
+
+    if (e.target.classList.contains('column-add-card-btn') || e.target.classList.contains('column-footer')) {
+      const column = e.target.closest('.column');
+      column.querySelector('.column-main').appendChild(this.actualElement);
+    }
+
   }
 
   deleteOnClick(e) {
