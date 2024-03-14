@@ -1,6 +1,7 @@
-import { validateColumnTitle } from '../utils';
+import { validateColumnTitle, convertTitleToSelector } from '../utils';
 
 describe('validate utils', () => {
+
   test.each([
     ['current title', 'column title', true],
     ['short current title', 'test', true],
@@ -15,4 +16,12 @@ describe('validate utils', () => {
   ])('testing %s with value "%s" and expected - %s', (desc, string, expected) => {
     expect(validateColumnTitle(string)).toBe(expected);
   });
+
+  test.each([
+    ['input with upper case', 'TEST input', 'test-input'],
+    ['input with several spaces', 'input element selector', 'input-element-selector'],
+  ])('testing "%s", test: %s, expected: %s', (desc, string, expected) => {
+    expect(convertTitleToSelector(string)).toBe(expected);
+  });
+
 });
