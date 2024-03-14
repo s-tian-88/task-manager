@@ -15,7 +15,7 @@ export default class Card {
 
     document.body.addEventListener('mousedown', this.onMouseDown);
     document.addEventListener('DOMContentLoaded', this.renderAlreadyCards);
-    document.body.addEventListener('mouseup', this.onMouseUp);
+    document.addEventListener('mousemove', (e) => {e.preventDefault()})
   }
 
   buildCardElement(id, title, description) {
@@ -65,21 +65,26 @@ export default class Card {
       description: widget.querySelector('.card-widget-description').value,
     };
 
-    const currentColumn = e.target.closest('.column');
-    const currentWidget = currentColumn.querySelector('.card-widget').remove();
+      if (cardObject.title && cardObject.description) {
 
-    currentColumn.querySelector('.column-add-card-btn').classList.remove('hide');
+      const currentColumn = e.target.closest('.column');
+      const currentWidget = currentColumn.querySelector('.card-widget').remove();
 
-    localStorage.setItem(cardObject.id, JSON.stringify(cardObject));
-    this.renderCardElement(cardObject);
+      currentColumn.querySelector('.column-add-card-btn').classList.remove('hide');
+
+      localStorage.setItem(cardObject.id, JSON.stringify(cardObject));
+      this.renderCardElement(cardObject);
+    }
   }
 
   cardElementMouseEnter(e) {
-    e.target.querySelector('.delete').classList.remove('hide');
+    e.target.querySelector('.delete').style.display = 'block';
+    e.target.style.cursor = 'grab';
   }
 
   cardElementMouseLeave(e) {
-    e.target.querySelector('.delete').classList.add('hide');
+    e.target.querySelector('.delete').style.display = 'none';
+    e.target.style.cursor = 'default';
   }
 
   cardOnMouseDown(e) {
@@ -90,13 +95,13 @@ export default class Card {
     }
 
     this.actualElement = e.target.closest('.card');
-    this.actualElement.querySelector('.delete').classList.add('hide');
 
     this.draggedElement = e.target.closest('.card').cloneNode(true);
     this.draggedElement.classList.add('dragged-element');
+    this.draggedElement.querySelector('.delete').style.display = 'none';
 
     this.draggedElement.style.width = `${this.actualElement.offsetWidth}px`;
-    this.actualElement.classList.add('actual-element');
+    this.actualElement.style.opacity = 0;
 
     this.actualElementCoords = this.actualElement.getBoundingClientRect();
     document.body.appendChild(this.draggedElement);
@@ -108,6 +113,8 @@ export default class Card {
     this.draggedElement.style.top = `${this.actualElementCoords.y - 8}px`;
 
     document.body.addEventListener('mousemove', this.onMouseMove);
+    document.body.addEventListener('mouseup', this.onMouseUp);
+    document.body.style.cursor = 'grabbing'
   }
 
   onMouseDown(e) {
@@ -120,14 +127,16 @@ export default class Card {
   onMouseUp(e) {
     if (this.draggedElement) {
       e.preventDefault();
-      this.actualElement.classList.remove('actual-element');
       this.draggedElement.remove();
+      this.actualElement.style.opacity = 1;
 
       const storageItem = JSON.parse(localStorage.getItem(this.actualElement.getAttribute('id')));
       storageItem.column = this.actualElement.closest('.column').getAttribute('name');
       localStorage.setItem(storageItem.id, JSON.stringify(storageItem));
 
       document.body.removeEventListener('mousemove', this.onMouseMove);
+      document.body.removeEventListener('mouseup', this.onMouseUp);
+      document.body.style.cursor = 'default';
     }
   }
 

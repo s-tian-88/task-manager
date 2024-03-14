@@ -11,13 +11,6 @@
     font-weight: bold;
 }
 
-.card-description-content {
-
-}
-
-.card-buttons {
-}
-
 .delete {
     border: none;
     background-color: inherit;
@@ -27,14 +20,14 @@
     top: 5px; right: 5px;
 }
 
-.actual-element {
-    opacity: 0;
-}
-
 .dragged-element {
     pointer-events: none;
     font-family: "Gill Sans", sans-serif;;
     position: absolute;
     z-index: 999;
     cursor: 
+}
+
+.title {
+    cursor: default;
 }

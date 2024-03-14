@@ -46,7 +46,7 @@ export default class CardWidget {
   }
 
   submit(e) {
-    e.preventDefault();
+    // e.preventDefault();
   }
 
   widgetBreakOnClick(e) {

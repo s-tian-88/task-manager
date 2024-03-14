@@ -2,7 +2,6 @@ export function getColumnHtml(title) {
   const html = `
       <header class="column-header">
           <div class="column-header-title">${title.toUpperCase()}</div>
-          <button class="column-header-btn">...</button>
       </header>
       <main class="column-main"></main>
       <footer class="column-footer">

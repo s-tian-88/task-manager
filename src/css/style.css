@@ -4,9 +4,12 @@ body {
     margin: 0;
     overflow-x: hidden;
     min-height: 100vh;
-    
 }
 
-.hide {
-    display: none;
+.column-header {
+    pointer-events: none;
+}
+
+.title {
+    pointer-events: none;
 }
