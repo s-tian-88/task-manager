@@ -40,9 +40,24 @@
 
 .btn {
     margin-right: 2rem;
-    font-size: 1rem;
-    color: #213E4F;
+    width: 24px;
+    height: 24px;
     border: none;
     background-color: inherit;
     cursor: pointer;
+    opacity: 0.6;
 }
+
+.card-widget-add {
+    background-image: url('./imgs/Add_round.svg');
+}
+
+.card-widget-clean {
+    background-image: url('./imgs/circle_right_alt.svg');
+}
+
+.card-widget-break {
+    background-image: url('./imgs/Close_round.svg');
+}
+
+

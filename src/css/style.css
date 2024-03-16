@@ -13,3 +13,7 @@ body {
 .title {
     pointer-events: none;
 }
+
+.pointer-events-none {
+    pointer-events: none;
+}

@@ -1,5 +1,4 @@
-import { getCardWidgetHTML } from './cardWidgetHTML';
-import './cardWidget.css';
+import { getCardWidgetHTML } from './cardWidgetHTML'; import './cardWidget.css';
 
 export default class CardWidget {
   constructor() {
@@ -37,10 +36,10 @@ export default class CardWidget {
 
     if (this.currentWidget) {
       this.currentWidget.remove();
-      this.currentColumn.querySelector('.column-add-card-btn').classList.remove('hide');
+      this.currentColumn.querySelector('.column-add-card-btn').style.display = 'block';
     }
 
-    e.target.classList.add('hide');
+    e.target.style.display = 'none';
     this.currentColumn = e.target.closest('.column');
     this.currentWidget = this.renderCardWidgetElement(this.currentColumn);
   }
@@ -52,7 +51,7 @@ export default class CardWidget {
   widgetBreakOnClick(e) {
     e.preventDefault();
     this.currentWidget.remove();
-    this.currentColumn.querySelector('.column-add-card-btn').classList.remove('hide');
+    this.currentColumn.querySelector('.column-add-card-btn').style.display = 'block';
   }
 
   widgetCleanOnClick = (e) => {

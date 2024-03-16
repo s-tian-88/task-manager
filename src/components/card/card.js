@@ -15,7 +15,7 @@ export default class Card {
 
     document.body.addEventListener('mousedown', this.onMouseDown);
     document.addEventListener('DOMContentLoaded', this.renderAlreadyCards);
-    document.addEventListener('mousemove', (e) => {e.preventDefault()})
+    document.addEventListener('mousemove', (e) => { e.preventDefault(); });
   }
 
   buildCardElement(id, title, description) {
@@ -25,6 +25,7 @@ export default class Card {
     cardElement.innerHTML = getCardHtml(title, description);
 
     cardElement.querySelector('.delete').addEventListener('click', this.deleteOnClick);
+    cardElement.querySelector('.delete').style.display = 'none';
     cardElement.addEventListener('mouseenter', this.cardElementMouseEnter);
     cardElement.addEventListener('mouseleave', this.cardElementMouseLeave);
     cardElement.addEventListener('mousedown', this.cardOnMouseDown);
@@ -65,12 +66,11 @@ export default class Card {
       description: widget.querySelector('.card-widget-description').value,
     };
 
-      if (cardObject.title && cardObject.description) {
-
+    if (cardObject.title && cardObject.description) {
       const currentColumn = e.target.closest('.column');
       const currentWidget = currentColumn.querySelector('.card-widget').remove();
 
-      currentColumn.querySelector('.column-add-card-btn').classList.remove('hide');
+      currentColumn.querySelector('.column-add-card-btn').style.display = 'block';
 
       localStorage.setItem(cardObject.id, JSON.stringify(cardObject));
       this.renderCardElement(cardObject);
@@ -102,6 +102,7 @@ export default class Card {
 
     this.draggedElement.style.width = `${this.actualElement.offsetWidth}px`;
     this.actualElement.style.opacity = 0;
+    this.actualElement.classList.add('pointer-events-none');
 
     this.actualElementCoords = this.actualElement.getBoundingClientRect();
     document.body.appendChild(this.draggedElement);
@@ -114,7 +115,7 @@ export default class Card {
 
     document.body.addEventListener('mousemove', this.onMouseMove);
     document.body.addEventListener('mouseup', this.onMouseUp);
-    document.body.style.cursor = 'grabbing'
+    document.body.style.cursor = 'grabbing';
   }
 
   onMouseDown(e) {
@@ -128,7 +129,9 @@ export default class Card {
     if (this.draggedElement) {
       e.preventDefault();
       this.draggedElement.remove();
+
       this.actualElement.style.opacity = 1;
+      this.actualElement.classList.remove('pointer-events-none');
 
       const storageItem = JSON.parse(localStorage.getItem(this.actualElement.getAttribute('id')));
       storageItem.column = this.actualElement.closest('.column').getAttribute('name');
